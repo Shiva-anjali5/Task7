@@ -19,14 +19,12 @@ pipeline {
             }
         }
 
-     
-
         stage('Deploy') {
             steps {
                 // Deploy Docker container
                 script {
                     bat "docker login -u yourusername -p yourpassword"
-                    bat "docker push ${DOCKER_IMAGE}:latest"
+                    bat "docker push ${DOCKER_IMAGE}"
                     // Stop and remove any existing container
                     bat "docker rm -f ${CONTAINER_NAME} || true"
                     // Run the Docker container
