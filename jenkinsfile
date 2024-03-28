@@ -23,7 +23,7 @@ pipeline {
             steps {
                 // Deploy Docker container
                 script {
-                    bat "docker login -u yourusername -p yourpassword"
+                    bat "docker login -u shivanjali1012 -p Shiva@anjali5"
                     bat "docker push ${DOCKER_IMAGE}"
                     // Stop and remove any existing container
                     bat "docker rm -f ${CONTAINER_NAME} || true"
