@@ -1,5 +1,5 @@
 # Use a base image with JDK pre-installed
-FROM openjdk:11 as builder
+FROM openjdk:21 as builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY SwapNumbers.java /app
 RUN javac SwapNumbers.java
 
 # Use a lightweight base image
-FROM openjdk:11-jre-slim
+FROM openjdk:21-jre-slim
 
 # Set the working directory inside the container
 WORKDIR /app
