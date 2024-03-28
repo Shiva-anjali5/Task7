@@ -20,4 +20,4 @@ WORKDIR /app
 COPY --from=builder /app/SwapNumbers.class /app
 
 # Command to run the Java application
-CMD ["java", "SwapNumber"]
+CMD ["java", "SwapNumbers"]
