@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'swapnumbers:latest'
+        CONTAINER_NAME = 'swapnumbers-container'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                // Checkout source code from Git repository
+                git 'https://github.com/Shiva-anjali5/Task7.git'
+                
+                // Build Docker image
+                script {
+                    bat "docker build -t ${DOCKER_IMAGE} -f Dockerfile ."
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // You can add your test scripts or commands here
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Deploy Docker container
+                script {
+                    bat "docker login -u yourusername -p yourpassword"
+                    bat "docker push ${DOCKER_IMAGE}:latest"
+                    // Stop and remove any existing container
+                    bat "docker rm -f ${CONTAINER_NAME} || true"
+                    // Run the Docker container
+                    bat "docker run -d --name ${CONTAINER_NAME} -p 8080:8080 ${DOCKER_IMAGE}"
+                }
+            }
+        }
+    }
+}
